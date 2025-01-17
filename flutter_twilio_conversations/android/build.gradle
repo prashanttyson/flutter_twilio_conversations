@@ -25,7 +25,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '1.8' // Use Java 8 for Kotlin
+        jvmTarget = '1.8.0' // Use Java 8 for Kotlin
     }
 }
 
