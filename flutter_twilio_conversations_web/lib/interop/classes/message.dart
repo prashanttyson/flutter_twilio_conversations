@@ -12,6 +12,7 @@ class TwilioConversationsMessage {
   external String sid;
   external String author;
   external DateTime dateCreated;
+  external DateTime dateUpdated;
   external String body;
   external String channelSid;
   external String participantSid;

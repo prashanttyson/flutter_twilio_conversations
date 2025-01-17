@@ -8,6 +8,8 @@ class Message {
 
   final DateTime? _dateCreated;
 
+  final DateTime? _dateUpdated;
+
   String _messageBody;
 
   final String? _channelSid;
@@ -41,6 +43,10 @@ class Message {
   /// The creation date for this message.
   DateTime? get dateCreated {
     return _dateCreated;
+  }
+
+  DateTime? get dateUpdated {
+    return _dateUpdated;
   }
 
   /// The body for this message.
@@ -94,6 +100,7 @@ class Message {
     this._sid,
     this._author,
     this._dateCreated,
+    this._dateUpdated,
     this._channelSid,
     this._memberSid,
     this._member,
@@ -105,6 +112,7 @@ class Message {
     this._attributes,
   )   : assert(_author != null),
         assert(_dateCreated != null),
+        assert(_dateUpdated != null),
         assert(_channelSid != null),
         assert(_messages != null),
         assert(_messageIndex != null),
