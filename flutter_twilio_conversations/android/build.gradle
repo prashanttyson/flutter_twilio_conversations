@@ -30,11 +30,11 @@ android {
 }
 
 dependencies {
-    // Use Kotlin standard library
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    // Kotlin standard library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
 
     // Kotlin reflection library
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
 
     // Twilio Conversations SDK
     implementation 'com.twilio:conversations-android:6.1.1'
