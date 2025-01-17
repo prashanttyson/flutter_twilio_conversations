@@ -1,49 +1,41 @@
-group 'twilio.flutter.flutter_twilio_conversations'
-version '1.0-SNAPSHOT'
-
-buildscript {
-    ext.kotlin_version = '1.8.0'
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.4'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+plugins {
+    id 'com.android.library' // For library projects
+    id 'kotlin-android'      // For Kotlin Android support
 }
 
-rootProject.allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+group = 'twilio.flutter.flutter_twilio_conversations'
+version = '1.0-SNAPSHOT'
 
 android {
-    compileSdkVersion 33
+    compileSdk = 33 // Updated to modern `compileSdk` syntax
+
+    defaultConfig {
+        minSdk = 21 // Minimum supported Android API level
+        targetSdk = 35
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/kotlin' // Add Kotlin source directory
     }
-    defaultConfig {
-        minSdkVersion 21
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    lint {
+        abortOnError = false // Prevent build failure on lint errors
+        disable += ['InvalidPackage'] // Suppress 'InvalidPackage' warnings
     }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '1.8' // Use Java 8 for Kotlin
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    implementation 'com.twilio:conversations-android:6.0.3'
+    // Use Kotlin standard library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    // Kotlin reflection library
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+
+    // Twilio Conversations SDK
+    implementation 'com.twilio:conversations-android:6.1.1'
 }

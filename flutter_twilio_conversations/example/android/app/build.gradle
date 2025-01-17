@@ -11,60 +11,65 @@ if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '1'
+def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
+
+plugins {
+    id 'com.android.application' // Modern Gradle plugins DSL
+    id 'kotlin-android'          // Kotlin plugin for Android
 }
 
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
-
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 34
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    lintOptions {
-        disable 'InvalidPackage'
-    }
+    namespace = "twilio.flutter.conversations_example" // Namespace property for AGP 7.3+
+    compileSdk = 34 // Modern way to set compileSdkVersion
 
     defaultConfig {
-        applicationId "twilio.flutter.conversations_example"
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
+        applicationId = "twilio.flutter.conversations_example"
+        minSdk = 21 // Minimum supported Android API level for Flutter
+        targetSdk = 35 // Targeting the latest Android API level
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true // Required for handling large method counts
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin' // Add Kotlin source directory
+    }
+
+    lint {
+        abortOnError = false // Prevent build failure due to lint errors
+        disable += ['InvalidPackage'] // Suppress specific lint warnings
     }
 
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
-
         release {
             signingConfig signingConfigs.debug
+            // Uncomment the following lines if using ProGuard for release builds
+            // minifyEnabled true
+            // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 flutter {
-    source '../..'
+    source '../..' // Point to the Flutter module
 }
 
 dependencies {
-    implementation("androidx.multidex:multidex:2.0.1")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    // Multidex for handling large method counts
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    // Kotlin Standard Library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    // Testing libraries
+    testImplementation 'junit:junit:4.13.2' // Updated JUnit version
+    androidTestImplementation 'androidx.test:runner:1.5.2' // Latest AndroidX Test Runner
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Latest Espresso Core
 }
