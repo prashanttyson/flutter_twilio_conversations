@@ -7,7 +7,7 @@ group = 'twilio.flutter.flutter_twilio_conversations'
 version = '1.0-SNAPSHOT'
 
 android {
-    compileSdk = 33 // Updated to modern `compileSdk` syntax
+    compileSdk = 34 // Updated to modern `compileSdk` syntax
 
     defaultConfig {
         minSdk = 21 // Minimum supported Android API level
