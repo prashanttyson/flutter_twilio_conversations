@@ -25,7 +25,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '1.8.0' // Use Java 8 for Kotlin
+        jvmTarget = '1.8' // Use Java 8 for Kotlin (fixed format)
     }
 }
 
@@ -34,7 +34,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
 
     // Kotlin reflection library
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.2"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.21" // Match kotlin-stdlib version
 
     // Twilio Conversations SDK
     implementation 'com.twilio:conversations-android:6.1.1'
