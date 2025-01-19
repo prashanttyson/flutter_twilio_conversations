@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'      // For Kotlin Android support
 }
 
-group = 'twilio.flutter.flutter_twilio_conversations'
+group = 'twilio.flutter_twilio_conversations'
 version = '1.0-SNAPSHOT'
 
 android {
