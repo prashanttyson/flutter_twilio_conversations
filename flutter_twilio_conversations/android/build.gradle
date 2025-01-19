@@ -7,7 +7,7 @@ group = 'twilio.flutter_twilio_conversations'
 version = '1.0-SNAPSHOT'
 
 android {
-     namespace = "twilio.flutter.conversations_example" 
+     namespace = "twilio.flutter.twilio_conversations" 
     compileSdk = 34 // Updated to modern `compileSdk` syntax
 
     defaultConfig {
