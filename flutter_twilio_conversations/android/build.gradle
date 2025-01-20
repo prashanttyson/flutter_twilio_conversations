@@ -6,6 +6,8 @@ plugins {
 group = 'twilio.flutter_twilio_conversations'
 version = '1.0-SNAPSHOT'
 
+ext.kotlin_version = "1.8.21"
+
 android {
      namespace = "twilio.flutter.twilio_conversations" 
     compileSdk = 34 // Updated to modern `compileSdk` syntax
@@ -32,11 +34,20 @@ android {
 
 dependencies {
     // Kotlin standard library
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Kotlin reflection library
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.21" // Match kotlin-stdlib version
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version" // Match kotlin-stdlib version
 
     // Twilio Conversations SDK
     implementation 'com.twilio:conversations-android:6.1.1'
+}
+
+buildscript {
+    ext {
+        kotlin_version = "1.8.21"
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Match Kotlin version
+    }
 }
