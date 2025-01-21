@@ -24,7 +24,7 @@ class Messages {
           .sendMessage(options.toMap(), _channel.sid);
       final messageMap = Map<String, dynamic>.from(methodData);
       return Message._fromMap(messageMap, this);
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -34,7 +34,7 @@ class Messages {
     try {
       await FlutterTwilioConversationsPlatform.instance
           .removeMessage(_channel.sid, message.messageIndex!);
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -53,7 +53,7 @@ class Messages {
         messages.add(Message._fromMap(messageMap, this));
       }
       return messages;
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -71,7 +71,7 @@ class Messages {
         messages.add(Message._fromMap(messageMap, this));
       }
       return messages;
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -90,7 +90,7 @@ class Messages {
         messages.add(Message._fromMap(messageMap, this));
       }
       return messages;
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -103,7 +103,7 @@ class Messages {
 
       final messageMap = Map<String, dynamic>.from(methodData);
       return Message._fromMap(messageMap, this);
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -118,7 +118,7 @@ class Messages {
         _channel.sid,
         lastReadMessageIndex,
       );
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -133,7 +133,7 @@ class Messages {
           .instance
           .advanceLastReadMessageIndexWithResult(
               _channel.sid, lastReadMessageIndex);
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -144,7 +144,7 @@ class Messages {
       return _lastReadMessageIndex = await FlutterTwilioConversationsPlatform
           .instance
           .setAllMessagesReadWithResult(_channel.sid);
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -155,7 +155,7 @@ class Messages {
       return _lastReadMessageIndex = await FlutterTwilioConversationsPlatform
           .instance
           .setNoMessagesReadWithResult(_channel.sid);
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }

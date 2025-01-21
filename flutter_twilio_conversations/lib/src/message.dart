@@ -126,6 +126,7 @@ class Message {
       map['sid'],
       map['author'],
       DateTime.parse(map['dateCreated']),
+      DateTime.parse(map['dateUpdated']),
       map['channelSid'],
       map['memberSid'],
       Member.fromMap(map['member']?.cast<String, dynamic>()),
@@ -153,7 +154,7 @@ class Message {
     try {
       _messageBody = await FlutterTwilioConversationsPlatform.instance
           .updateMessageBody(_channelSid, _messageIndex, body);
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw throw TwilioConversationsClient._convertException(err);
     }
   }
@@ -165,7 +166,7 @@ class Message {
       return Map<String, dynamic>.from(await FlutterTwilioConversationsPlatform
           .instance
           .setAttributes(_channelSid, _messageIndex, attributes));
-    } on PlatformException catch (err) {
+    } on Exception catch (err) {
       throw TwilioConversationsClient._convertException(err);
     }
   }
