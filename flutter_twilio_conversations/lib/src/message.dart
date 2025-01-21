@@ -137,7 +137,7 @@ class Message {
       MessageMedia.fromMap(map['media']?.cast<String, dynamic>()),
       Attributes.fromMap(map['attributes'].cast<String, dynamic>()),
     );
-    message._updateFromMap(map);
+    message.updateMessageBody(message._messageBody);
     return message;
   }
 
@@ -151,24 +151,15 @@ class Message {
 
   /// Updates the body for a message.
   Future<void> updateMessageBody(String body) async {
-    try {
-      _messageBody = await FlutterTwilioConversationsPlatform.instance
-          .updateMessageBody(_channelSid, _messageIndex, body);
-    } on Exception catch (err) {
-      throw throw TwilioConversationsClient._convertException(err);
-    }
-  }
+     _messageBody = await FlutterTwilioConversationsPlatform.instance
+      .updateMessageBody(_channelSid, _messageIndex, body);
 
   /// Set attributes associated with this message.
   Future<Map<String, dynamic>> setAttributes(
       Map<String, dynamic> attributes) async {
-    try {
-      return Map<String, dynamic>.from(await FlutterTwilioConversationsPlatform
+        return Map<String, dynamic>.from(await FlutterTwilioConversationsPlatform
           .instance
           .setAttributes(_channelSid, _messageIndex, attributes));
-    } on Exception catch (err) {
-      throw TwilioConversationsClient._convertException(err);
-    }
   }
   //#endregion
 
@@ -179,4 +170,5 @@ class Message {
 
   @override
   String toString() => '$_messageBody';
+}
 }
