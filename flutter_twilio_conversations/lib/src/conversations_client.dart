@@ -2,10 +2,10 @@ part of flutter_twilio_conversations;
 
 /// Entry point for the Twilio Programmable Dart.
 class TwilioConversationsClient extends FlutterTwilioConversationsPlatform {
-  static const EventChannel _mediaProgressChannel =
+  static EventChannel _mediaProgressChannel =
       EventChannel('flutter_twilio_conversations/media_progress');
 
-  static const EventChannel _loggingChannel =
+  static EventChannel _loggingChannel =
       EventChannel('flutter_twilio_conversations/logging');
 
   static StreamSubscription? _loggingStream;
@@ -14,11 +14,11 @@ class TwilioConversationsClient extends FlutterTwilioConversationsPlatform {
 
   static ChatClient? chatClient;
 
-  static Exception _convertException(PlatformException err) {
-    var code = int.tryParse(err.code);
+  static Exception _convertException(Exception err) {
+    var code = int.tryParse(err.toString());
     // If code is an integer, then it is a Twilio ErrorInfo exception.
     if (code != null) {
-      return ErrorInfo(int.parse(err.code), err.message, err.details as int);
+      return ErrorInfo(int.parse(err.toString()), err.toString(), err.toString() as int);
     }
 
     // For now just rethrow the PlatformException. But we could make custom ones based on the code value.
@@ -65,8 +65,7 @@ class TwilioConversationsClient extends FlutterTwilioConversationsPlatform {
   static Future<ChatClient?> create(String token, Properties properties) async {
     assert(token != '');
 
-    try {
-      TwilioConversationsClient._log(
+     TwilioConversationsClient._log(
           'TwilioConversationsPlugin.create => starting request in Dart');
       final methodData = await FlutterTwilioConversationsPlatform.instance
           .createChatClient(token, properties.toMap());
@@ -76,11 +75,5 @@ class TwilioConversationsClient extends FlutterTwilioConversationsPlatform {
       final chatClientMap = Map<String, dynamic>.from(methodData as Map);
       chatClient = ChatClient._fromMap(chatClientMap);
       return chatClient;
-    } on PlatformException catch (err) {
-      TwilioConversationsClient._log(
-        'TwilioConversationsPlugin.create => failed in Dart',
-      );
-      throw TwilioConversationsClient._convertException(err);
-    }
   }
 }

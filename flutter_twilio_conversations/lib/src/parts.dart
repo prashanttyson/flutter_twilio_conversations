@@ -3,8 +3,9 @@ library flutter_twilio_conversations;
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
-import '../../../flutter_twilio_conversations_platform_interface/lib/src/platform_interface/flutter_twilio_conversations_platform.dart';
+import 'package:flutter/services.dart';
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter_twilio_conversations_platform_interface/flutter_twilio_conversations_platform_interface.dart';
 
 part 'attributes.dart';
 part 'channel.dart';
